@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="hu">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UI Dashboard</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/69e7b384b5.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="style.css" />
+    <script>
+      function showPage(pageId) {
+        document.querySelectorAll(".content").forEach((page) => {
+          page.style.display = "none";
+        });
+        document.getElementById(pageId).style.display = "block";
+      }
+
+      function toggleDropdown() {
+        const dropdown = document.getElementById("ppDropdown");
+        dropdown.classList.toggle("active");
+      }
+
+      window.onload = () => showPage("infoPage");
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="wrapper">
+        <div class="sidebar">
+          <ul>
+            <li onclick="showPage('infoPage')">
+              <i class="fas fa-info-circle"></i> Információ
+            </li>
+            <li onclick="toggleDropdown()">
+              <i class="fas fa-dollar-sign"></i> PP
+              <ul class="dropdown" id="ppDropdown">
+                <li onclick="showPage('premiumItemsPage')">Tárgyak</li>
+                <li onclick="showPage('premiumVehiclesPage')">Járművek</li>
+              </ul>
+            </li>
+            <li onclick="showPage('adminPage')">
+              <i class="fas fa-users"></i> Admin
+            </li>
+            <li onclick="showPage('settingsPage')">
+              <i class="fas fa-cogs"></i> Beállítások
+            </li>
+          </ul>
+        </div>
+
+        <!-- Információ Page -->
+        <div class="content" id="infoPage">
+          <div class="header">Információ</div>
+          <div class="info">
+            <div class="details">
+              <p><strong>Név:</strong> John Strafe</p>
+              <p><strong>Kor:</strong> 67 év</p>
+              <p><strong>Munka:</strong> Fűnyíró</p>
+              <p><strong>License:</strong> 3</p>
+              <p><strong>Játszott percek:</strong> 164 perc</p>
+              <p><strong>Készpénz:</strong> 468,895,340 $</p>
+              <p><strong>Banki egyenleg:</strong> 0 $</p>
+              <p><strong>Prémium egyenleg:</strong> 2,796,200 PP</p>
+              <p><strong>Járműveid száma:</strong> 1 db</p>
+            </div>
+            <div class="avatar">
+              <img src="avatar_placeholder.png" alt="Character Avatar" />
+              <span>Skined</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Premium Items Page -->
+        <div class="content" id="premiumItemsPage" style="display: none">
+          <div class="header">Prémium Tárgyak</div>
+          <p>Itt vásárolhatsz prémium tárgyakat.</p>
+        </div>
+
+        <!-- Premium Vehicles Page -->
+        <div class="content" id="premiumVehiclesPage" style="display: none">
+          <div class="header">Prémium Járművek</div>
+          <p>Itt vásárolhatsz prémium járműveket.</p>
+        </div>
+
+        <!-- Admin Page -->
+        <div class="content" id="adminPage" style="display: none">
+          <div class="header">Adminok</div>
+          <div class="admin-list">
+            <ul>
+              <li>Admin 1</li>
+              <li>Admin 2</li>
+              <li>Admin 3</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Settings Page -->
+        <div class="content" id="settingsPage" style="display: none">
+          <div class="header">Beállítások</div>
+          <div class="settings">
+            <label> <input type="checkbox" /> Térkép megjelenítése </label>
+            <label> <input type="checkbox" /> Chat megjelenítése </label>
+            <label>
+              <input type="checkbox" /> Hangbeállítások engedélyezése
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
