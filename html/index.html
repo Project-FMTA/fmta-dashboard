@@ -37,12 +37,8 @@
             <li onclick="showPage('infoPage')">
               <i class="fas fa-info-circle"></i> Információ
             </li>
-            <li onclick="toggleDropdown()">
-              <i class="fas fa-dollar-sign"></i> PP
-              <ul class="dropdown" id="ppDropdown">
-                <li onclick="showPage('premiumItemsPage')">Tárgyak</li>
-                <li onclick="showPage('premiumVehiclesPage')">Járművek</li>
-              </ul>
+            <li onclick="showPage('premiumShopPage')">
+              <i class="fas fa-gift"></i> Premium Shop
             </li>
             <li onclick="showPage('adminPage')">
               <i class="fas fa-users"></i> Admin
@@ -75,16 +71,18 @@
           </div>
         </div>
 
-        <!-- Premium Items Page -->
-        <div class="content" id="premiumItemsPage" style="display: none">
-          <div class="header">Prémium Tárgyak</div>
-          <p>Itt vásárolhatsz prémium tárgyakat.</p>
-        </div>
-
-        <!-- Premium Vehicles Page -->
-        <div class="content" id="premiumVehiclesPage" style="display: none">
-          <div class="header">Prémium Járművek</div>
-          <p>Itt vásárolhatsz prémium járműveket.</p>
+        <!-- Premium Shop Page -->
+        <div class="content" id="premiumShopPage" style="display: none">
+          <div class="header">Prémium Shop</div>
+          <h3>Tárgyak</h3>
+          <ul id="premiumItemsList">
+            <!-- Dynamically populated by JavaScript -->
+          </ul>
+          
+          <h3>Járművek</h3>
+          <ul id="premiumVehiclesList">
+            <!-- Dynamically populated by JavaScript -->
+          </ul>
         </div>
 
         <!-- Admin Page -->
@@ -112,5 +110,69 @@
         </div>
       </div>
     </div>
+
+    <script>
+      // This script will be responsible for displaying the premium items and vehicles
+      const premiumItems = [
+        { name: 'Gold AK47', price: 1000000, description: 'A powerful weapon with extra damage.' },
+        { name: 'Diamond Shield', price: 500000, description: 'Protect yourself from enemy fire.' },
+        // Add more items as needed
+      ];
+
+      const premiumVehicles = [
+        { name: 'Lamborghini Aventador', price: 3000000, description: 'A fast and luxurious car.' },
+        { name: 'Helicopter Bell 407', price: 5000000, description: 'Fly high with this premium helicopter.' },
+        // Add more vehicles as needed
+      ];
+
+      // Populate items and vehicles in the Premium Shop
+      function populateShop() {
+        const itemsList = document.getElementById('premiumItemsList');
+        premiumItems.forEach(item => {
+          const listItem = document.createElement('li');
+          listItem.innerHTML = `${item.name} - ${item.price} PP: <br> ${item.description} <br> <button onclick="buyItem('${item.name}', ${item.price})">Vásárlás</button>`;
+          itemsList.appendChild(listItem);
+        });
+
+        const vehiclesList = document.getElementById('premiumVehiclesList');
+        premiumVehicles.forEach(vehicle => {
+          const listItem = document.createElement('li');
+          listItem.innerHTML = `${vehicle.name} - ${vehicle.price} PP: <br> ${vehicle.description} <br> <button onclick="buyVehicle('${vehicle.name}', ${vehicle.price})">Vásárlás</button>`;
+          vehiclesList.appendChild(listItem);
+        });
+      }
+
+      function buyItem(itemName, price) {
+        // Call the server to handle item purchase
+        fetch(`https://yourserver/buyItem`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ itemName, price })
+        })
+          .then(response => response.json())
+          .then(data => {
+            alert(data.message); // Show server response
+          });
+      }
+
+      function buyVehicle(vehicleName, price) {
+        // Call the server to handle vehicle purchase
+        fetch(`https://yourserver/buyVehicle`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ vehicleName, price })
+        })
+          .then(response => response.json())
+          .then(data => {
+            alert(data.message); // Show server response
+          });
+      }
+
+      // Initialize the shop
+      window.onload = function () {
+        showPage("premiumShopPage");
+        populateShop();
+      };
+    </script>
   </body>
 </html>

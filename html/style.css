@@ -5,7 +5,7 @@
     --color-sidebar-bg: rgba(0, 0, 0, 0.5);
     --color-hover-bg: rgba(0, 0, 0, 0.3);
     --color-panel-bg: rgba(0, 0, 0, 0.8);
-    --color-highlight: #3cb882;
+    --color-highlight: rgba(60, 184, 130, 0.3);
     --color-border: #444;
     --color-shadow: rgba(0, 0, 0, 0.2);
 }
@@ -171,32 +171,65 @@ body {
 }
 
 /* Premium Shop */
-.dropdown {
-    margin-bottom: 20px;
+#premiumShopPage {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
+    flex-direction: column;
+    gap: 30px;
 }
 
-.dropdown label {
-    font-size: 1.2rem;
-    margin-right: 10px;
+#premiumShopPage h3 {
+    font-size: 1.8rem;
+    text-align: center;
+    margin-bottom: 20px;
 }
 
-.dropdown select {
-    padding: 10px;
+#premiumItemsList,
+#premiumVehiclesList {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#premiumItemsList li,
+#premiumVehiclesList li {
     background-color: var(--color-hover-bg);
-    color: var(--color-white);
-    border: none;
-    border-radius: 5px;
-    font-size: 1rem;
-    box-shadow: 0 2px 5px var(--color-shadow);
-}
-
-.shop-content {
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px var(--color-shadow);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
     font-size: 1.2rem;
     color: var(--color-white);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#premiumItemsList li:hover,
+#premiumVehiclesList li:hover {
+    background-color: var(--color-highlight);
+}
+
+#premiumItemsList li button,
+#premiumVehiclesList li button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: var(--color-primary);
+    border: none;
+    border-radius: 5px;
+    color: var(--color-white);
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#premiumItemsList li button:hover,
+#premiumVehiclesList li button:hover {
+    background-color: var(--color-highlight);
+    transform: scale(1.1);
 }
 
 /* Admin Page */
